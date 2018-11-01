@@ -1,0 +1,2 @@
+docker network create --attachable websites
+curl -s https://raw.githubusercontent.com/scbd/bioland-infra/master/services/load-balancer-compose.yml | docker-compose -f - -p load-balancer up -d
