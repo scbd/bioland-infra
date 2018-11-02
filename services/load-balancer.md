@@ -2,10 +2,10 @@
 ## Prerequisite  
 
 ### Networks
-- websites
+- webgateway
 
 ```
-docker network create --attachable --driver=DRIVER_NAME websites
+docker network create --attachable --driver=DRIVER_NAME webgateway
 ```
 
 ## Run Load Balancer

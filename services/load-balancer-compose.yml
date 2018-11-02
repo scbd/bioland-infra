@@ -3,7 +3,22 @@ version: '3'
 services:
   traefik:
     image: traefik # The official Traefik docker image
-    command: --api --docker --docker.exposedbydefault=false # Enables the web UI and tells Traefik to listen to docker
+    command: >    
+      --api 
+      --docker 
+      --docker.exposedbydefault=false
+      --acme
+      --acme.email=blaise.fonseca@cbd.int
+      --acme.onhostrule=true
+      --acme.storage=/etc/traefik/acme.json
+      --acme.entryPoint=https
+      --defaultentrypoints="http,https"
+      --entryPoints="Name:http  Address::80  Redirect.EntryPoint:https"
+      --entryPoints="Name:https Address::443 TLS"
+      --acme.httpchallenge=true
+      --acme.httpchallenge.entrypoint=https
+      --accesslogsfile=/dev/stdout
+      --logLevel=DEBUG
     restart: always
     ports:
       - "80:80"     # The HTTP port
@@ -11,8 +26,10 @@ services:
       - "8080:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock #So that Traefik can listen to the Docker events
-
+      - traefik-data:/etc/traefik
+volumes:
+  traefik-data:
 networks:
   default:
     external:
-      name: websites
+      name: webgateway
