@@ -8,7 +8,7 @@ services:
       --docker 
       --docker.exposedbydefault=false
       --acme
-      --acme.email=blaise.fonseca@cbd.int
+      --acme.email=it@cbd.int
       --acme.onhostrule=true
       --acme.storage=/etc/traefik/acme.json
       --acme.entryPoint=https
