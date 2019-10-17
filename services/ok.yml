@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  ok:
+      image: randyhoulahan/ok
+      environment:
+        DISK_SPACE_PATH: /host
+        DISK_SPACE_ALARM_RATE: 10
+      networks:
+        - webgateway
+        - default
+      labels:
+        - "traefik.enable=true"
+        - "traefik.port=8888"
+        - "traefik.frontend.rule=Host:ok.chm-cbd.net"
+        - "traefik.docker.network=webgateway"
+      volumes:
+        - type: bind
+          source: /
+          target: /host
+      external_links:
+        - loadbalancer_traefik_1
+      restart: always
+
+networks:
+  default:
+  webgateway:
+    external: true
