@@ -18,7 +18,7 @@ services:
       --acme.httpchallenge=true
       --acme.httpchallenge.entrypoint=https
       --accesslogsfile=/dev/stdout
-      --logLevel=DEBUG
+      --logLevel=INFO
     restart: always
     ports:
       - "80:80"     # The HTTP port
